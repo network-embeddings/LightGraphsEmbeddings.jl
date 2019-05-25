@@ -49,7 +49,7 @@ function flux_matrix(g)
     return B, edgeidmap
 end
 
-function reluctant_matrix(g)
+function reluctant_matrix(g::SimpleWeightedGraph)
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, 2*aristas, 2*aristas)
     for (e,u) in edgeidmap
@@ -63,7 +63,7 @@ function reluctant_matrix(g)
     return B, edgeidmap
 end
 
-function normalized_reluctant(g)
+function normalized_reluctant(g::SimpleWeightedGraph)
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, 2*aristas, 2*aristas)
     for (e,u) in edgeidmap
@@ -77,7 +77,7 @@ function normalized_reluctant(g)
     return B, edgeidmap
 end
 
-function ihara_matrix(g)
+function ihara_matrix(g::SimpleWeightedDiGraph)
     v = g.weights
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, aristas, aristas)
@@ -96,7 +96,7 @@ function ihara_matrix(g)
     return B, edgeidmap
 end
 
-function ihara_reluctant(g)
+function ihara_reluctant(g::SimpleWeightedDiGraph)
     v = g.weights
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, aristas, aristas)
