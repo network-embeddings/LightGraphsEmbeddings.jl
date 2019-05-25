@@ -1,16 +1,5 @@
 #!/usr/bin/env julia
 
-#  function NB_matrix(g)
-#      A = Matrix(adjacency_matrix(g))
-#      ceros = 0*(A)
-#      D = 0*(A)
-#      menos = -1 * one(A)
-#      for n in 1:nv(g)
-#          D[n,n] = degree(g,n)-1
-#      end
-#      sparse(hcat(vcat(ceros,menos),vcat(D,A)))
-#  end
-
 function NB_matrix(g)
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, 2*aristas, 2*aristas)
@@ -88,7 +77,7 @@ function normalized_reluctant(g)
     return B, edgeidmap
 end
 
-function ollin_matrix(g)
+function ihara_matrix(g)
     v = g.weights
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, aristas, aristas)
@@ -99,8 +88,6 @@ function ollin_matrix(g)
         for l in eles
             if strengthin(g,l)>0
                 B[edgeidmap[Edge(k,l)],u] = (kron_δ(j,k)*(1-kron_δ(i,l)))*(2/(1/v[i,j]+1/v[k,l]))*(1/strengthin(g,l))
-                #  B[edgeidmap[Edge(k,l)],u] = (kron_δ(j,k)*(1-kron_δ(i,l)))*((v[i,j]+v[k,l])/2)*(1/strengthin(g,l))
-                #  B[edgeidmap[Edge(k,l)],u] = (2/(1/v[i,j]+1/v[k,l]))*(1/strengthin(g,l))
             else
                 B[edgeidmap[Edge(k,l)],u] = 0
             end
@@ -109,7 +96,7 @@ function ollin_matrix(g)
     return B, edgeidmap
 end
 
-function ollin_reluctant(g)
+function ihara_reluctant(g)
     v = g.weights
     edgeidmap, m, aristas = mapa(g)
     B = zeros(Float64, aristas, aristas)

@@ -36,7 +36,7 @@ function strengthout(g,i)
     strength
 end
 
-function inv_degree_ollin(g,i,v)
+function inv_degree_ihara(g,i,v)
     try
         1/strength(g,i,v)
     catch
@@ -89,11 +89,11 @@ function nonBM_embedding(g)
           push!(los_indices_reales,i)
       end
   end
-  matriz_embedded = sub(real(eigve),:,los_indices_reales)
+  matrix_embedded = sub(real(eigve),:,los_indices_reales)
   length(los_reales), los_indices_reales
   ϕ = zeros(Float64, nv(g), length(los_reales))
   for n=1:(length(los_reales))
-      v= matriz_embedded[:,n]
+      v= matrix_embedded[:,n]
       ϕ[:,n] = contract(g, v)
   end
   return length(los_reales), ϕ
@@ -177,10 +177,10 @@ end
 
 function embe_nbm(g,ind,vec)
 	reales = real(vectores[:,index])
-	arriba = reales[1:nv(g),:]
-	abajo = reales[nv(g)+1:2*nv(g),:]
-	matriz_embedded = arriba + abajo
-	matriz_embedded
+	up = reales[1:nv(g),:]
+	down = reales[nv(g)+1:2*nv(g),:]
+	matrix_embedded = up + down
+	matrix_embedded
 end
 
 function contract(g,v,ei)
