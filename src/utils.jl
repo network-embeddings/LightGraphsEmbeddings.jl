@@ -201,23 +201,3 @@ function contraction(g,vec,emb,ei)
 	end
 	contracted
 end
-
-function membership(n,v)
-    membership = Array{Int64}(0)
-    if n == 2
-        for i in 1:length(v[:,1])
-            if sign(v[i,1]) == sign(1)
-                push!(membership,1)
-            else
-                push!(membership,2)
-            end
-        end
-    else
-        matriz_sirve = v
-        cluster_p = R_kmeans(matriz_sirve[:,1:n-1],n,nstart=500)
-        for i in 1:length(cluster_p[1])
-            push!(membership,cluster_p[1][i])
-        end
-    end
-    membership
-end
