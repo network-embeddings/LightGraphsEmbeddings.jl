@@ -1,3 +1,4 @@
+include(matrices.jl)
 function NBMembedding(g; matrix = ihara_matrix)
     edgeidmap, m, aristas = mapa(g)
     NBM, edgeidmap = matrix(g)
